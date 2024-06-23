@@ -24,11 +24,10 @@ export const Right = ({duration, sound, isPlaying, ...props})=>{
     },[duration])
 
     useEffect(()=>{
-        if(isPlaying){
+        if(isPlaying && sound){
+            setCurrentTime(timeToString(sound.seek([]),1));
             const interval = setInterval(() => {
-                if (sound) {
-                    setCurrentTime(timeToString(sound.seek([]),1));
-                }
+                setCurrentTime(timeToString(sound.seek([]),1));
               }, 500);
               return () => clearInterval(interval);
         }

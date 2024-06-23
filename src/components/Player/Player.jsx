@@ -2,7 +2,7 @@ import { Tappable , Image, Cell } from "@vkontakte/vkui";
 import classes from "./Player.module.css";
 import useSound from "use-sound";
 import { Left } from "../Left/Left";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Medium } from "../Medium/Medium";
 import { Right } from "../Right/Right";
 
@@ -12,21 +12,22 @@ export const Player = ({song})=>{
     const [isPlaying, setIsPlaying] = useState(false);
     const [play, { pause, duration, sound }] = useSound(audio);
 
-    const handleClick = ()=>{
-        if(isPlaying){
-            setIsPlaying(!isPlaying);
-            pause();
+    useEffect(()=>{
+        if(duration){
+            if(isPlaying)
+            {
+                play();
+            }    
+            else{
+                pause();
+            }
         }
-        else{
-            setIsPlaying(!isPlaying);
-            play();
-        }
-    }
+    },[isPlaying, duration])
 
     return(
         <Cell 
             className={classes.playerContainer}
-            onClick={handleClick}
+            onClick={()=>setIsPlaying(!isPlaying)}
             before={
                 <Left 
                     poster={poster} 
