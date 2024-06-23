@@ -1,0 +1,14 @@
+.mediumContainer{
+    padding: 10px 0px;
+    margin:0;
+    width: fill;
+}
+
+.title{
+    color: var(--vkui--color_text_primary);
+
+}
+
+.subtitle{
+    color: var(--vkui--color_text_secondary);
+}
